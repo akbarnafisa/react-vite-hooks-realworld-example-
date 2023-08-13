@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -8,9 +7,10 @@ import axios from 'axios'
 import App from './App'
 // import makeServer from './server'
 
-if (process.env.NODE_ENV === 'production') {
-  axios.defaults.baseURL = 'https://api.realworld.io/api'
-}
+// if (process.env.NODE_ENV === 'production') {
+//   axios.defaults.baseURL = 'https://api.realworld.io/api'
+// }
+axios.defaults.baseURL = 'https://api.realworld.io/api'
 
 const defaultQueryFn = async ({ queryKey }) => {
   const { data } = await axios.get(queryKey[0], { params: queryKey[1] })

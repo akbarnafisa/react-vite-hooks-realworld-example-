@@ -1,6 +1,36 @@
-import React from "react"
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable import/named */
+import React from 'react'
+import classNames from 'classnames'
+import { ArticleList, PopularTags } from '../components'
+// import { useAuth } from '../hooks'
+
+const initialFilters = { tag: null, offset: 0, feed: false }
 
 function Home() {
+  // TODO: handle auth
+  // const { isAuth } = useAuth()
+  // const [filters, setFilters] = React.useState({ ...initialFilters, feed: isAuth })
+  const [filters, setFilters] = React.useState({ ...initialFilters })
+
+  function onTagClick(tag) {
+    setFilters({
+      ...initialFilters,
+      tag,
+    })
+  }
+
+  function onGlobalFeedClick() {
+    setFilters(initialFilters)
+  }
+
+  function onPaginationClick(selectedPage) {
+    setFilters({
+      ...filters,
+      offset: selectedPage,
+    })
+  }
+
   return (
     <div className="home-page">
       <div className="banner">
@@ -27,36 +57,33 @@ function Home() {
                     </button>
                   </li>
                 )} */}
-                {/* <li className="nav-item">
+                {/*
+                 */}
+
+                <li className="nav-item">
                   <button
                     type="button"
                     className={classNames('nav-link', {
-                      active: !filters?.tag && !filters.feed,
+                      // active: !filters?.tag && !filters.feed,
+                      active: !filters?.tag,
                     })}
                     onClick={onGlobalFeedClick}
                   >
                     Global Feed
                   </button>
                 </li>
+
                 {filters?.tag && (
                   <li className="nav-item">
                     <a className="nav-link active"># {filters?.tag}</a>
                   </li>
-                )} */}
-                <li className="nav-item">
-                  <button
-                    type="button"
-                    className="nav-link active"
-                  >
-                    Global Feed
-                  </button>
-                </li>
+                )}
               </ul>
             </div>
-            {/* <ArticleList filters={filters} /> */}
+            <ArticleList filters={filters} onPaginationClick={onPaginationClick} />
           </div>
           <div className="col-md-3">
-            {/* <PopularTags onTagClick={onTagClick} /> */}
+            <PopularTags onTagClick={onTagClick} />
           </div>
         </div>
       </div>

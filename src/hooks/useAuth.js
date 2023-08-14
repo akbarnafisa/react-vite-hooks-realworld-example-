@@ -3,27 +3,43 @@ import { isEmpty } from 'lodash-es'
 import { useSnapshot, proxy } from 'valtio'
 
 function getAuthUser() {
-  const jwt = window.localStorage.getItem('jwtToken')
-
-  if (!jwt) {
+  try {
+    const jwt = window.localStorage.getItem('jwtToken')
+    if (!jwt) {
+      return {}
+    }
+    return JSON.parse(atob(jwt))
+  } catch (error) {
     return {}
   }
-
-  return JSON.parse(atob(jwt))
 }
+
 
 const state = proxy({
   authUser: getAuthUser(),
+  isAppLoaded: false,
   get isAuth() {
     return !isEmpty(state.authUser)
-  }
+  },
 })
 
+function setCredential(user) {
+  state.authUser = user
+  axios.defaults.headers.Authorization = `Token ${state.authUser.token}`
+}
+
 const actions = {
+  loadApp: () => {
+    const authUser = getAuthUser()
+    if (!isEmpty(authUser)) {
+      setCredential(authUser)
+    }
+
+    state.isAppLoaded = true
+  },
   login: (user) => {
-    state.authUser = user
     window.localStorage.setItem('jwtToken', btoa(JSON.stringify(state.authUser)))
-    axios.defaults.headers.Authorization = `Token ${state.authUser.token}`
+    setCredential(user)
   },
   logout: () => {
     state.authUser = {}
@@ -35,7 +51,7 @@ const actions = {
     if (!authUser || isEmpty(authUser)) {
       actions.logout()
     }
-  }
+  },
 }
 
 function useAuth() {

@@ -5,7 +5,7 @@ import {
   Settings,
   // Editor,
   // Article,
-  // Profile,
+  Profile,
   Auth,
 } from './pages'
 import {
@@ -59,13 +59,15 @@ function App() {
                 </AuthRoute>
               }
             />
+
+            <Route path="/profile/:username" element={<Profile />} />
             {/* 
     
         
           <AuthRoute path="/editor" element={<Editor />} />
           <Route path="/editor/:slug" element={<Editor />} />
           <Route path="/article/:slug" element={<Article />} />
-          <Route path="/profile/:username" element={<Profile />} />
+          
           <AuthRoute path="/@:username" element={<Profile />} /> */}
           </Routes>
         </main>

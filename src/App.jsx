@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import {
   Home,
-  // Settings,
+  Settings,
   // Editor,
   // Article,
   // Profile,
   Auth,
 } from './pages'
 import {
+  AuthRoute,
   // AuthRoute,
   GuestRoute,
   Navbar,
@@ -23,7 +24,6 @@ function App() {
   useEffect(() => {
     loadApp()
   }, [loadApp])
-
 
   if (isAppLoaded) {
     return (
@@ -50,9 +50,18 @@ function App() {
                 </GuestRoute>
               }
             />
+
+            <Route
+              path="/settings"
+              element={
+                <AuthRoute>
+                  <Settings />
+                </AuthRoute>
+              }
+            />
             {/* 
     
-          <AuthRoute path="/settings" element={<Settings />} />
+        
           <AuthRoute path="/editor" element={<Editor />} />
           <Route path="/editor/:slug" element={<Editor />} />
           <Route path="/article/:slug" element={<Article />} />
@@ -75,7 +84,7 @@ function App() {
     )
   }
 
-  return (<></>)
+  return <></>
 }
 
 export default App

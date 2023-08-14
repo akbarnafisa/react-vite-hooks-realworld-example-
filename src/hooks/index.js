@@ -1,5 +1,4 @@
-/* eslint-disable import/prefer-default-export */
-// export { default as useAuth } from './useAuth'
+export { default as useAuth } from './useAuth'
 // export { default as useInterval } from './useInterval'
 // export { default as useArticleQuery } from './useArticleQuery'
 export { default as useArticlesQuery } from './useArticlesQuery'

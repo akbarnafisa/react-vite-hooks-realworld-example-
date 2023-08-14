@@ -1,22 +1,17 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import {
   Home,
   // Settings,
   // Editor,
   // Article,
   // Profile,
-  // Auth
+  Auth,
 } from './pages'
 import {
   // AuthRoute,
-  // GuestRoute,
-  Navbar
+  GuestRoute,
+  Navbar,
 } from './components'
 
 // import './App.css'
@@ -30,7 +25,23 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <GuestRoute path="/register" element={<Auth key="register" />} />
+          <Route
+            path="/register"
+            element={
+              <GuestRoute>
+                <Auth key="register" />
+              </GuestRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <GuestRoute>
+                <Auth key="login" />
+              </GuestRoute>
+            }
+          />
+          {/* 
           <GuestRoute path="/login" element={<Auth key="login" />} />
           <AuthRoute path="/settings" element={<Settings />} />
           <AuthRoute path="/editor" element={<Editor />} />

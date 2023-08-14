@@ -38,8 +38,8 @@ const actions = {
     state.isAppLoaded = true
   },
   login: (user) => {
-    window.localStorage.setItem('jwtToken', btoa(JSON.stringify(state.authUser)))
     setCredential(user)
+    window.localStorage.setItem('jwtToken', btoa(JSON.stringify(user)))
   },
   logout: () => {
     state.authUser = {}

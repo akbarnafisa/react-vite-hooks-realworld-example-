@@ -3,15 +3,13 @@
 import React from 'react'
 import classNames from 'classnames'
 import { ArticleList, PopularTags } from '../components'
-// import { useAuth } from '../hooks'
+import { useAuth } from '../hooks'
 
 const initialFilters = { tag: null, offset: 0, feed: false }
 
 function Home() {
-  // TODO: handle auth
-  // const { isAuth } = useAuth()
-  // const [filters, setFilters] = React.useState({ ...initialFilters, feed: isAuth })
-  const [filters, setFilters] = React.useState({ ...initialFilters })
+  const { isAuth } = useAuth()
+  const [filters, setFilters] = React.useState({ ...initialFilters, feed: isAuth })
 
   function onTagClick(tag) {
     setFilters({
@@ -31,6 +29,10 @@ function Home() {
     })
   }
 
+  function onFeedClick() {
+    setFilters({ ...initialFilters, feed: true })
+  }
+
   return (
     <div className="home-page">
       <div className="banner">
@@ -44,7 +46,7 @@ function Home() {
           <div className="col-md-9">
             <div className="feed-toggle">
               <ul className="nav nav-pills outline-active">
-                {/* {isAuth && (
+                {isAuth && (
                   <li className="nav-item">
                     <button
                       onClick={onFeedClick}
@@ -56,16 +58,13 @@ function Home() {
                       Your Feed
                     </button>
                   </li>
-                )} */}
-                {/*
-                 */}
+                )}
 
                 <li className="nav-item">
                   <button
                     type="button"
                     className={classNames('nav-link', {
-                      // active: !filters?.tag && !filters.feed,
-                      active: !filters?.tag,
+                      active: !filters?.tag && !filters.feed,
                     })}
                     onClick={onGlobalFeedClick}
                   >

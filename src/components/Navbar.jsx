@@ -1,10 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-// import { useAuth } from '../hooks'
+import { useAuth } from '../hooks'
 
 function Navbar() {
-  // TODO: handle after auth
-  // const { isAuth, authUser } = useAuth()
+  const { isAuth, authUser } = useAuth()
 
   return (
     <nav className="navbar navbar-light">
@@ -18,7 +17,7 @@ function Navbar() {
               Home
             </NavLink>
           </li>
-          {/* {isAuth && (
+          {isAuth && (
             <>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/editor">
@@ -53,19 +52,7 @@ function Navbar() {
                 </NavLink>
               </li>
             </>
-          )} */}
-          <>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/register">
-                Sign up
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/login">
-                Sign in
-              </NavLink>
-            </li>
-          </>
+          )}
         </ul>
       </div>
     </nav>

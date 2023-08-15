@@ -16,9 +16,9 @@ import ArticlePreview from './ArticlePreview'
 const initialFilters = { author: null, favorited: null, tag: null, offset: 0, feed: false }
 const limit = 10
 
-function ArticleList({ filters = initialFilters, onPaginationClick }) {
+function ArticleList({ filters = initialFilters, onPaginationClick, isReadyToFetch = true  }) {
   // const [offset, setOffset] = React.useState(0)
-  const { data, isFetching, isError, isSuccess } = useArticlesQuery({ filters })
+  const { data, isFetching, isError, isSuccess } = useArticlesQuery({ filters }, { enabled: isReadyToFetch})
   const pages = Math.ceil(data.articlesCount / limit)
 
   if (isFetching) return <p className="article-preview">Loading articles...</p>

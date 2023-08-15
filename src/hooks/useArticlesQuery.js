@@ -1,7 +1,7 @@
 import { useQuery } from "react-query"
 import { omit } from 'lodash-es'
 
-function useArticlesQuery({ filters }) {
+function useArticlesQuery({ filters }, options) {
   return useQuery([`/articles${filters.feed ? '/feed' : ''}`, { limit: 10, ...omit(filters, ['feed']) }], {
     placeholderData: {
       articles: [],
@@ -9,6 +9,7 @@ function useArticlesQuery({ filters }) {
     },
     // better for pagination data
     keepPreviousData: true,
+    ...options,
   })
 }
 

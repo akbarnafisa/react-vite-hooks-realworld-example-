@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import { ArticleList, FollowProfileButton } from '../components'
+import { ArticleList, FollowProfileButton } from '../components'
 import { useAuth, useProfileQuery } from '../hooks'
 
 function Profile() {
@@ -25,8 +25,7 @@ function Profile() {
                   <i className="ion-gear-a" /> Edit Profile Settings
                 </Link>
               ) : (
-                // <FollowProfileButton />
-                <div>follow</div>
+                <FollowProfileButton />
               )}
             </div>
           </div>

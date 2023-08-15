@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import {
   Home,
   Settings,
-  // Editor,
+  Editor,
   // Article,
   Profile,
   Auth,
@@ -61,14 +61,28 @@ function App() {
             />
 
             <Route path="/profile/:username" element={<Profile />} />
+
+            <Route
+              path="/editor"
+              element={
+                <AuthRoute>
+                  <Editor />
+                </AuthRoute>
+              }
+            />
+
+            <Route
+              path="/editor/:slug"
+              element={
+                <AuthRoute>
+                  <Editor />
+                </AuthRoute>
+              }
+            />
             {/* 
-    
-        
-          <AuthRoute path="/editor" element={<Editor />} />
-          <Route path="/editor/:slug" element={<Editor />} />
+      
           <Route path="/article/:slug" element={<Article />} />
-          
-          <AuthRoute path="/@:username" element={<Profile />} /> */}
+        */}
           </Routes>
         </main>
         <footer>

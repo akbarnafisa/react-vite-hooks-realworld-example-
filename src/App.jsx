@@ -1,13 +1,6 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import {
-  Home,
-  Settings,
-  Editor,
-  // Article,
-  Profile,
-  Auth,
-} from './pages'
+import { Home, Settings, Editor, Article, Profile, Auth } from './pages'
 import {
   AuthRoute,
   // AuthRoute,
@@ -79,10 +72,8 @@ function App() {
                 </AuthRoute>
               }
             />
-            {/* 
-      
-          <Route path="/article/:slug" element={<Article />} />
-        */}
+
+            <Route path="/article/:slug" element={<Article />} />
           </Routes>
         </main>
         <footer>

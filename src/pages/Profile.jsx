@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArticleList, FollowProfileButton } from '../components'
 import { useAuth, useProfileQuery } from '../hooks'
+import { isEmpty } from 'lodash-es'
 
 function Profile() {
   const { data } = useProfileQuery()
@@ -17,15 +18,21 @@ function Profile() {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
-              <img src={image} className="user-img" />
-              <h4>{username}</h4>
-              <p>{bio}</p>
-              {canUpdateProfile ? (
-                <Link className="btn btn-sm btn-outline-secondary action-btn" to="/settings">
-                  <i className="ion-gear-a" /> Edit Profile Settings
-                </Link>
+              {isEmpty(data.profile) ? (
+                <div>loading...</div>
               ) : (
-                <FollowProfileButton />
+                <>
+                  <img src={image} className="user-img" />
+                  <h4>{username}</h4>
+                  <p>{bio}</p>
+                  {canUpdateProfile ? (
+                    <Link className="btn btn-sm btn-outline-secondary action-btn" to="/settings">
+                      <i className="ion-gear-a" /> Edit Profile Settings
+                    </Link>
+                  ) : (
+                    <FollowProfileButton profile={data.profile} />
+                  )}
+                </>
               )}
             </div>
           </div>

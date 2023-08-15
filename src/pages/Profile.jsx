@@ -99,7 +99,8 @@ function Profile() {
               </ul>
             </div>
 
-            <ArticleList filters={filters} onPaginationClick={onPaginationClick} isReadyToFetch={loaded} />
+            {/* using isReadyToFetch could prevent refetch data, it's better to hide the element if you want to prevent the double fetch */}
+            <ArticleList filters={filters} onPaginationClick={onPaginationClick} />
           </div>
         </div>
       </div>

@@ -1,11 +1,9 @@
 import classNames from 'classnames'
 import React from 'react'
-// import { useFavoriteArticleMutation } from '../hooks'
+import { useFavoriteArticleMutation } from '../hooks'
 
-// eslint-disable-next-line no-unused-vars
 function FavoriteArticleButton({ slug, favorited, children, className = '' }) {
-  // TODO: handle like after auth
-  // const { mutate, isLoading } = useFavoriteArticleMutation(slug)
+  const { mutate, isLoading } = useFavoriteArticleMutation(slug)
 
   return (
     <button
@@ -18,8 +16,8 @@ function FavoriteArticleButton({ slug, favorited, children, className = '' }) {
         },
         className
       )}
-      // onClick={() => mutate({ favorited })}
-      // disabled={isLoading}
+      onClick={() => mutate({ favorited })}
+      disabled={isLoading}
     >
       <i className="ion-heart" />
       {children}

@@ -20,6 +20,7 @@ function useFavoriteArticleMutation(slug) {
           await queryClient.cancelQueries(queryKey)
 
           queryClient.setQueryData(queryKey, ({ article: currentArticle }) => {
+            // TODO: revamp favorite logic
             const count = currentArticle.favoritesCount
 
             return {

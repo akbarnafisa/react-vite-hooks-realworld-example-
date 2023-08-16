@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useArticleQuery, useAuth } from '../hooks'
 import DeleteArticleButton from './DeleteArticleButton'
 import FavoriteArticleButton from './FavoriteArticleButton'
-// import FollowAuthorButton from './FollowAuthorButton'
+import FollowAuthorButton from './FollowAuthorButton'
 
 function ArticleMeta() {
   const { data } = useArticleQuery()
@@ -32,7 +32,7 @@ function ArticleMeta() {
         </span>
       ) : (
         <>
-          {/* <FollowAuthorButton /> */}
+          <FollowAuthorButton />
           &nbsp;&nbsp;
           <FavoriteArticleButton slug={slug} favorited={favorited}>
             &nbsp; {favorited ? 'Unfavorite' : 'Favorite'} Article <span className="counter">({favoritesCount})</span>

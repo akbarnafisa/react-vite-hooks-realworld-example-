@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQueryClient, useMutation } from 'react-query'
 import axios from 'axios'
 import useAuth from './useAuth'
+import { isEmpty } from 'lodash-es'
 
 function useFavoriteArticleMutation(slug) {
   const navigate = useNavigate()
@@ -19,8 +20,12 @@ function useFavoriteArticleMutation(slug) {
         if (isAuth) {
           await queryClient.cancelQueries(queryKey)
 
-          queryClient.setQueryData(queryKey, ({ article: currentArticle }) => {
+          queryClient.setQueryData(queryKey, (data) => {
             // TODO: revamp favorite logic
+            if (isEmpty(data) || isEmpty(data.articles)) {
+              return {}
+            }
+            const currentArticle = data.article
             const count = currentArticle.favoritesCount
 
             return {
@@ -43,6 +48,8 @@ function useFavoriteArticleMutation(slug) {
       onSettled: () => {
         // TODO: need to handle for /articles pagination
         queryClient.invalidateQueries(queryKey)
+        queryClient.invalidateQueries('/articles')
+        queryClient.invalidateQueries('/articles/feed')
       },
     }
   )

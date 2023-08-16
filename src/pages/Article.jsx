@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   ArticleMeta,
-  // ArticleComments
+  ArticleComments
 } from '../components'
 import { useArticleQuery } from '../hooks'
 
@@ -30,7 +30,7 @@ function Article() {
         </div>
         <div className="row">
           <div className="col-xs-12 col-md-8 offset-md-2">
-            {/* <ArticleComments /> */}
+            <ArticleComments />
           </div>
         </div>
       </div>
